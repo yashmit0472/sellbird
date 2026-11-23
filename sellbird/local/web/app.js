@@ -37,7 +37,6 @@ async function api(path, payload) {
   if (response.status === 401) {
     el("unlock").hidden = false;
     el("workspace").hidden = true;
-    el("demo").disabled = true;
     sessionStorage.removeItem("sellbird-local-token");
     token = "";
     throw new Error("Enter the token printed by the local launcher.");
@@ -186,14 +185,12 @@ async function showJob(id, scroll = false) {
 async function initialize() {
   if (!token) {
     el("unlock").hidden = false;
-    el("demo").disabled = true;
     return;
   }
   await Promise.all([updateWorkspace(), updateRuntime()]);
   sessionStorage.setItem("sellbird-local-token", token);
   el("workspace").hidden = false;
   el("unlock").hidden = true;
-  el("demo").disabled = false;
 }
 
 function onSubmit(id, operation) {
@@ -258,15 +255,6 @@ onSubmit("start", async values => {
   await updateWorkspace();
   await showJob(job.id, true);
   notice("Run queued.");
-});
-
-el("demo").addEventListener("click", async () => {
-  try {
-    const demo = await api("demo", {});
-    el("start").elements.reply.value = demo.reply;
-    await updateWorkspace();
-    notice("Loaded two fictional products and prospects and a sample reply.");
-  } catch (error) { notice(error.message, true); }
 });
 
 el("retry").addEventListener("click", async () => {

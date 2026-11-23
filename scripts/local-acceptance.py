@@ -34,6 +34,8 @@ with httpx.Client(base_url=base, headers=headers, trust_env=False) as api:
         capture = api.post("/api/capture", json={"name": "Example", "url": "https://example.com", "permitted": True})
         assert capture.status_code == 409, "Offline mode should refuse public capture."
 
+    seed = api.post("/api/demo", json={}).raise_for_status().json()
+
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(args=["--no-proxy-server"])
         recording = {"record_video_dir": output, "record_video_size": {"width": 1280, "height": 800}} if args.record else {}
@@ -51,8 +53,7 @@ with httpx.Client(base_url=base, headers=headers, trust_env=False) as api:
         video = page.video
         try:
             page.goto(base + "/#token=" + token)
-            page.get_by_role("button", name="Load demo data").click()
-            page.get_by_text("Loaded two fictional products", exact=False).wait_for()
+            page.locator("#start textarea[name=reply]").fill(seed["reply"])
             fixture = api.get("/api/workspace").raise_for_status().json()
             prospect = next(item for item in fixture["prospects"] if item["name"] == "Northline Heating")
             runs = []

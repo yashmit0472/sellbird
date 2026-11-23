@@ -17,7 +17,7 @@ The default model is `qwen3:1.7b`. On the tested 7.8 GiB laptop with a GTX 1650,
 
 ## Workflow
 
-1. Save your company and product brief or load the two fictional demo products. Select a product for each run. Optionally set one exact disqualifying phrase per line for an explicit product prerequisite.
+1. Under **Workspace setup**, use **Add or update a product** to save your company and product brief. Select a product for each run. Optionally set one exact disqualifying phrase per line for an explicit product prerequisite.
 2. Paste prospect evidence or import saved HTML. When connected, you can also explicitly capture a permitted public page. The source label or URL is saved with the evidence.
 3. Select a prospect, choose the installed model, and optionally paste a reply with conversation context.
 4. Queue a run. Profile and ICP generation happen first. Prospect runs add research, signals, a problem hypothesis, a score and a draft. A supplied reply is classified in the last step.
@@ -33,7 +33,7 @@ Public capture is an explicit import action. It uses Sellbird's public-IP HTTP t
 
 ## Offline acceptance
 
-1. Run the normal launcher, load the demo data, and queue a full RouteDesk run. Enter the supplied sample conversation so reply classification runs.
+1. Run the normal launcher, save a product and prospect evidence using the workspace forms, and queue a full run. For a reproducible example, use RouteDesk and Northline Heating from the [sample fixture](../sellbird/local/demo.json). Paste the fixture conversation to include reply classification.
 2. Close the launcher, disconnect Wi-Fi and Ethernet, and start `powershell -ExecutionPolicy Bypass -File .\scripts\local-run.ps1 -Offline`. Leave loopback enabled. Offline mode rejects public capture and external Python socket connections. The launcher starts the cloud-disabled daemon with external HTTP proxy traffic blocked at process scope.
 3. Repeat the eight steps from the browser. Try the same prospect with RenewalDesk to show how the product changes the analysis. Open **Local inference logs** and verify the model name, loopback URL, timings and token counts. Reconnect after recording.
 4. To automate the dashboard portion, run `\.venv314\Scripts\python.exe scripts/local-acceptance.py --record` against the offline launcher. Evidence and the browser recording go to `data/local/acceptance/offline`. This script restricts browser requests to the local dashboard. Disconnecting the computer's external network is a separate manual step. Use `--online` for a baseline.
