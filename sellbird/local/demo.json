@@ -1,0 +1,11 @@
+{
+  "products": [
+    {"company":"Cedar Systems","name":"RouteDesk","brief":"Cedar Systems makes simple scheduling tools for field service teams. RouteDesk gives dispatchers one calendar, automated appointment reminders and instant reassignment when a technician calls out. It targets residential repair companies with 10–60 technicians, especially those replacing spreadsheets or hiring dispatch coordinators."},
+    {"company":"Cedar Systems","name":"RenewalDesk","brief":"Cedar Systems builds tools for independent service businesses. RenewalDesk tracks annual service-plan renewals and reminds office teams about agreements close to expiry. It is for companies that manage hundreds of recurring maintenance agreements by hand.","exclusion_phrases":"does not currently sell recurring maintenance agreements"}
+  ],
+  "evidence": [
+    {"name":"Northline Heating","source":"Fictional demo / hiring page","body":"Northline Heating is a residential heating repair company with 27 technicians. Northline Heating is hiring a dispatch coordinator. The coordinator currently updates a shared spreadsheet to route emergency jobs. Northline Heating offers on-demand repairs and does not currently sell recurring maintenance agreements."},
+    {"name":"Blue Harbor Maintenance","source":"Fictional demo / services page","body":"Blue Harbor Maintenance manages more than 400 annual HVAC maintenance agreements. The office team tracks renewal dates in a spreadsheet and calls customers when agreements expire. Blue Harbor Maintenance already uses a modern dispatch system to schedule field technicians."}
+  ],
+  "reply":"Sales email: Would it be useful to see how RouteDesk handles technician callouts?\nProspect reply: Yes, can you send a short overview and suggest a time next Thursday?"
+}

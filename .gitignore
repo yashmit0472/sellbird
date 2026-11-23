@@ -58,3 +58,6 @@ sellbird.yaml.*
 harvey.local.yaml
 harvey.local.yaml.*
 harvey.yaml.*
+
+# Python 3.14 environment for the local sales workspace
+.venv314/

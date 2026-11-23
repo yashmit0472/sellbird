@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sellbird Local</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="/">Sellbird <span>Local</span></a>
+    <span id="runtime" class="pill">Checking Ollama</span>
+  </header>
+  <main>
+    <section class="intro">
+      <div><h1>Sales workspace</h1><p>Research prospects and draft outreach with a local model.</p></div>
+      <button id="demo" class="secondary" type="button">Load demo data</button>
+    </section>
+    <form id="unlock" class="card" hidden>
+      <h2>Unlock workspace</h2>
+      <label>Dashboard token <input name="token" type="password" autocomplete="off" required></label>
+      <button>Unlock</button>
+    </form>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <div id="workspace" hidden>
+      <div class="layout">
+        <section class="card run">
+          <h2>New run</h2>
+          <form id="start">
+            <label>Product <select aria-label="Product" name="product_id" required></select></label>
+            <label>Prospect <select aria-label="Prospect" name="prospect_id"></select></label>
+            <label>Local model <select aria-label="Local model" name="model" required></select></label>
+            <label>Sample conversation <textarea name="reply" rows="3" maxlength="4000" placeholder="Optional. Paste the email and reply to classify."></textarea></label>
+            <button>Queue run</button>
+          </form>
+        </section>
+        <section class="card setup">
+          <h2>Workspace setup</h2>
+          <details open>
+            <summary>Add or update a product</summary>
+            <form id="product">
+              <label>Company <input name="company" maxlength="100" required></label>
+              <label>Product name <input name="name" maxlength="100" required></label>
+              <label>Company and product brief <textarea name="brief" minlength="20" maxlength="2800" rows="3" required></textarea></label>
+              <label>Disqualifying evidence phrases <textarea name="exclusion_phrases" maxlength="1000" rows="2" placeholder="Optional. Enter one exact phrase per line."></textarea></label>
+              <button class="secondary">Save product</button>
+            </form>
+          </details>
+          <details>
+            <summary>Add prospect evidence</summary>
+            <form id="evidence">
+              <label>Prospect company <input name="name" maxlength="100" required></label>
+              <label>Input <select id="evidence-mode"><option value="text">Pasted text</option><option value="snapshot">Saved HTML</option><option value="public">Public website</option></select></label>
+              <div id="import-data">
+                <label>Source label or URL <input name="source" maxlength="1200"></label>
+                <label id="body-field">Evidence text <textarea name="body" maxlength="12000" rows="4"></textarea></label>
+                <label id="snapshot-field" hidden>Saved HTML file <input name="snapshot" type="file" accept=".html,.htm,text/html"></label>
+              </div>
+              <div id="capture-data" hidden>
+                <label>Public page URL <input name="url" type="url" maxlength="1200"></label>
+                <label class="check"><input name="permitted" type="checkbox"> The website permits this capture</label>
+              </div>
+              <button class="secondary">Save evidence</button>
+            </form>
+          </details>
+          <details>
+            <summary>Hardware and models</summary>
+            <div id="hardware" class="muted"></div>
+          </details>
+        </section>
+      </div>
+      <section class="card history">
+        <div class="heading"><h2>Runs</h2><label>Sort <select id="sort"><option value="recent">Most recent</option><option value="score">Latest score ranking</option></select></label></div>
+        <div class="table-wrap"><table><thead><tr><th>Product</th><th>Prospect</th><th>Score</th><th>Status</th><th>Run</th></tr></thead><tbody id="jobs"></tbody></table></div>
+      </section>
+      <section id="result" class="card" hidden>
+        <div class="heading"><div><h2 id="result-title">Run results</h2><p id="result-status" class="muted"></p></div><button id="retry" class="secondary" hidden type="button">Retry run</button></div>
+        <ol id="steps" class="step-list"></ol>
+        <details>
+          <summary>Saved evidence for this run</summary>
+          <div id="sources"></div>
+        </details>
+        <details id="log-panel">
+          <summary>Local inference logs</summary>
+          <pre id="logs"></pre>
+        </details>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

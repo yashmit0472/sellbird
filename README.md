@@ -1,3 +1,11 @@
+## Sellbird Local assignment edition
+
+This fork includes a multi-product sales workspace that runs entirely on local AI. It uses Ollama with Qwen3, SQLite, FastAPI and local Sentence Transformers embeddings.
+
+**Start here** [Windows setup, architecture, cost and offline testing](docs/local-assignment.md).
+
+---
+
 <p align="center">
   <a href="https://sellbird.ai">
     <picture>
